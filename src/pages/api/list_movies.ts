@@ -61,12 +61,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return;
     }
 
-    logger.info('Starting to wait');
-    await sleep(3000); // Wait for 10 seconds
-    logger.info('Finished waiting');
-
     // We consider 'queryString' as a concatenation of Query and Page
-    const queryString = `${pageNumber}_${pageNumber}` 
+    const queryString = `${query}_${pageNumber}` 
 
     // 1. First checks if the cache record exist in DynamoDB. If it does compare the timestamp to see if its older than 2 minutes. If all is true return cache 
     const moviesFromCache = await moviesRepository.findById(queryString)
